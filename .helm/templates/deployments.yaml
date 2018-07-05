@@ -2,9 +2,9 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: proxy
+  name: {{ template "fullname" . }}-proxy
 spec:
-  replicas: 2
+  replicas: 1
   minReadySeconds: 15
   strategy:
     type: RollingUpdate
@@ -15,6 +15,7 @@ spec:
     metadata:
       labels:
         app: proxy
+        chart: {{ template "fullname" . }}
     spec:
       containers:
         - image: jeroenvdheuvel/kubernetes-helm-test:proxy
@@ -27,9 +28,9 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: webserver
+  name: {{ template "fullname" . }}-webserver
 spec:
-  replicas: 2
+  replicas: 3
   minReadySeconds: 15
   strategy:
     type: RollingUpdate
@@ -40,6 +41,7 @@ spec:
     metadata:
       labels:
         app: webserver
+        chart: {{ template "fullname" . }}
     spec:
       containers:
         - image: jeroenvdheuvel/kubernetes-helm-test:webserver
