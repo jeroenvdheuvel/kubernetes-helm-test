@@ -6,4 +6,6 @@ WORKDIR /var/www/html
 
 COPY . .
 
+EXPOSE 8080/tcp
+
 CMD ["php", "-S", "0.0.0.0:8080"]
